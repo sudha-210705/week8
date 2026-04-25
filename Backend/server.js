@@ -14,6 +14,13 @@ app.use(cors({
       
       'http://localhost:5173' 
     ];
+     const vercelPreview = "https://week8-ejs5.vercel.app"
+
+     if (!origin || allowedOrigins.includes(origin) || vercelPreview.test(origin)) {
+      callback(null, true);
+    } else {
+       callback(new Error('Not allowed by CORS'));
+     }
 
   },
   credentials: true,
