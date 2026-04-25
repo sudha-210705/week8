@@ -3,23 +3,25 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 
 function AddUser() {
-
   const { register, handleSubmit } = useForm();
 
   const onUserCreate = async (data) => {
     try {
+      const payload = {
+        ...data,
+        mobileNumber: data.mobileNumber ? Number(data.mobileNumber) : undefined
+      };
 
       let res = await axios.post(
-   "https://week8-gpmu.onrender.com/user-api/users",
-  data
-);
+        "https://week8-gpmu.onrender.com/user-api/users",
+        payload
+      );
 
       console.log(res.data);
       alert("User created successfully");
-
     } catch (err) {
       console.log(err.response?.data);
-      alert("Error creating user");
+      alert(err.response?.data?.message || "Error creating user");
     }
   };
 
@@ -28,7 +30,6 @@ function AddUser() {
       <h4 className="text-3xl mb-4">FORM</h4>
 
       <form onSubmit={handleSubmit(onUserCreate)}>
-
         <input
           type="text"
           placeholder="Name"
@@ -59,7 +60,6 @@ function AddUser() {
         <button className="border p-2 m-2 bg-blue-500 text-white">
           Add User
         </button>
-
       </form>
     </div>
   );

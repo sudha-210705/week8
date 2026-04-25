@@ -5,11 +5,20 @@ import { usermodel } from "../MODELS/USERMODEL.js";
 // CREATE USER
 UserApp.post('/users', async (req, res, next) => {
   try {
-    const newuserdoc = new usermodel(req.body);
-    await newuserdoc.save();
+    console.log("REQUEST BODY:", req.body);
 
+    const userData = {
+      name: req.body.name,
+      email: req.body.email,
+      dateofBirth: req.body.dateofBirth,
+      mobileNumber: req.body.mobileNumber ? Number(req.body.mobileNumber) : undefined
+    };
+
+    const newuserdoc = new usermodel(userData);
+    await newuserdoc.save();
     res.status(201).json({ message: "user created" });
   } catch (err) {
+    console.log("FULL ERROR:", err);
     next(err);
   }
 });
@@ -29,9 +38,16 @@ UserApp.get('/users/:id', async (req, res) => {
 // UPDATE USER
 UserApp.put('/users/:id', async (req, res, next) => {
   try {
+    const userData = {
+      name: req.body.name,
+      email: req.body.email,
+      dateofBirth: req.body.dateofBirth,
+      mobileNumber: req.body.mobileNumber ? Number(req.body.mobileNumber) : undefined
+    };
+
     const updatedUser = await usermodel.findByIdAndUpdate(
       req.params.id,
-      { $set: req.body },
+      { $set: userData },
       { new: true }
     );
 
