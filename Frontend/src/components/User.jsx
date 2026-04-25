@@ -25,7 +25,7 @@ function User() {
   const updateUser = async () => {
     try {
       await axios.put(
-        `https://week-8-userapp.onrender.com/user-api/users/${user._id}`,
+        // `https://week-8-userapp.onrender.com/user-api/users/${user._id}`,
         formData
       );
 
@@ -41,7 +41,7 @@ function User() {
  const deleteUser = async () => {
   try {
     await axios.patch(
-      `https://week-8-userapp.onrender.com/user-api/users/${user._id}`
+       `http://localhost:4000/user-api/users/${user._id}`
     );
 
     alert("User deleted");

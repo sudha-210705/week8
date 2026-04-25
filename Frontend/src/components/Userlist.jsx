@@ -9,7 +9,7 @@ function Userlist() {
   const getUsers = async () => {
     try {
       let res = await fetch(
-        "https://week-8-userapp.onrender.com/user-api/users",
+         "http://localhost:4000/user-api/users",
         { cache: "no-store" }
       );
 

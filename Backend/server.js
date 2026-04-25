@@ -11,17 +11,10 @@ const app = exp();
 app.use(cors({
   origin: function (origin, callback) {
     const allowedOrigins = [
-      'https://week-8-user-app.vercel.app',
+      
       'http://localhost:5173' 
     ];
 
-    const vercelPreview = /^https:\/\/week-8-user-app.*\.vercel\.app$/;
-
-    if (!origin || allowedOrigins.includes(origin) || vercelPreview.test(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
   },
   credentials: true,
 }));

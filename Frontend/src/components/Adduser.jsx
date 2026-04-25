@@ -10,7 +10,7 @@ function AddUser() {
     try {
 
       let res = await axios.post(
-  "https://week-8-userapp.onrender.com/user-api/users",
+   "http://localhost:4000/user-api/users",
   data
 );
 
