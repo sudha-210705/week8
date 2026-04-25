@@ -10,7 +10,7 @@ function AddUser() {
     try {
 
       let res = await axios.post(
-   "http://localhost:4000/user-api/users",
+   "https://week8-gpmu.onrender.com/user-api/users",
   data
 );
 

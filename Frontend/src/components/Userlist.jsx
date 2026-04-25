@@ -9,7 +9,7 @@ function Userlist() {
   const getUsers = async () => {
     try {
       let res = await fetch(
-         "http://localhost:4000/user-api/users",
+         "https://week8-gpmu.onrender.com/user-api/users",
         { cache: "no-store" }
       );
 
