@@ -51,7 +51,7 @@ function User() {
       alert("User deleted");
       window.location.href = "/userlist";
     } catch (err) {
-      alert("Delete failed");
+      alert(err.response?.data?.message || "Delete failed");
     }
   };
 
@@ -61,8 +61,18 @@ function User() {
 
       {isEditing ? (
         <div className="flex flex-col gap-2">
-          <input name="name" value={formData.name} onChange={handleChange} className="border p-2" />
-          <input name="email" value={formData.email} onChange={handleChange} className="border p-2" />
+          <input
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className="border p-2"
+          />
+          <input
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className="border p-2"
+          />
           <input
             type="date"
             name="dateofBirth"
@@ -77,12 +87,15 @@ function User() {
             className="border p-2"
           />
 
-          <button onClick={updateUser} className="bg-green-500 text-white p-2">
+          <button
+            onClick={updateUser}
+            className="bg-green-500 text-white p-2"
+          >
             Save
           </button>
         </div>
       ) : (
-        <div>
+        <div className="flex flex-col gap-2">
           <p>Name: {user?.name}</p>
           <p>Email: {user?.email}</p>
           <p>DOB: {user?.dateofBirth?.split("T")[0]}</p>
@@ -98,7 +111,10 @@ function User() {
           {isEditing ? "Cancel" : "Edit"}
         </button>
 
-        <button onClick={deleteUser} className="bg-red-500 text-white p-2">
+        <button
+          onClick={deleteUser}
+          className="bg-red-500 text-white p-2"
+        >
           Delete
         </button>
       </div>

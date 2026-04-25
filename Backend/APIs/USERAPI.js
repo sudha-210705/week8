@@ -78,6 +78,8 @@ UserApp.patch('/users/:id', async (req, res) => {
 
 // ERROR HANDLER
 UserApp.use((err, req, res, next) => {
+  console.log("FULL ERROR:", err);
+
   if (err.name === "ValidationError") {
     return res.status(400).json({
       message: "Validation failed",
@@ -91,13 +93,14 @@ UserApp.use((err, req, res, next) => {
     });
   }
 
-  if (err.code === 11000) {
+  if (err.code === 11000 || err?.cause?.code === 11000) {
     return res.status(409).json({
-      message: "Email already exists",
+      message: "Email already exists, please use a different email",
     });
   }
 
   res.status(500).json({
     message: "Internal Server Error",
+    error: err.message
   });
 });
